@@ -26,9 +26,10 @@
       xhr.setRequestHeader('Content-Type','application/json');
       xhr.addEventListener('load', () => {
         const result = JSON.parse(xhr.responseText);
+        const resultDiv = document.querySelector('.ajaxResult');
         console.log('result : ', result);
-        if(result.result !== "ok") return;
-        document.querySelector('.ajaxResult').innerHTML = `ajaxResult : ${result.email}`;
+        if(result.result !== "ok") resultDiv.innerHTML = 'your email is not found'
+        else resultDiv.innerHTML = `ajaxResult : ${result.name}`;
       })
       xhr.send(data);
     }
