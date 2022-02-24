@@ -1,0 +1,23 @@
+let dummyData = [
+  'Leonor@kellie.org',
+  'ElmoreProsacco@willie.com',
+  'Raleigh@silas.org',
+  'Laisha@silas.org',
+  'Merle@modesto.net',
+  'ElmoreProsacco@Laisha.us',
+  'ElmoreProsacco@erik.us',
+  'JaclynKutch@erik.us',
+  'Laisha@jactinthe.info',
+  'Felicita@jon.com',
+  'ElmoreProsacco@willie.tv',
+  'Daisha@jactinthe.info',
+  'Laisha@modesto.net',
+  'Felicita@willie.tv',
+  'Merle@modesto.net',
+  'Laisha@willie.com',
+  'JaclynKutch@tia.me',
+  'Raleigh@erik.us',
+  'Merle@kellie.org',
+  'ElmoreProsacco@jon.com',
+];
+module.exports = dummyData;
