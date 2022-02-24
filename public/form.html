@@ -12,5 +12,26 @@
     <input type="text" name="email" id="email"> <br>
     <input type="submit">
   </form>
+  <button class="ajaxsend">ajaxsend</button>
+  <div class="ajaxResult"></div>
+  <script>
+    document.querySelector('.ajaxsend').addEventListener('click',() => {
+      const inputData = document.forms[0].elements[0].value;
+      sendAjax('http://127.0.0.1:3000/ajax_send_email',inputData);
+    })
+    const sendAjax = (url,email) => {
+      const data = JSON.stringify({'email' : email});
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST',url);
+      xhr.setRequestHeader('Content-Type','application/json');
+      xhr.addEventListener('load', () => {
+        const result = JSON.parse(xhr.responseText);
+        console.log('result : ', result);
+        if(result.result !== "ok") return;
+        document.querySelector('.ajaxResult').innerHTML = `ajaxResult : ${result.email}`;
+      })
+      xhr.send(data);
+    }
+  </script>
 </body>
 </html>
