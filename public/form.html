@@ -7,7 +7,7 @@
   <title>Document</title>
 </head>
 <body>
-  <form action="/email_post" method="post">
+  <form action="/email/form" method="post">
     <label for="email">email</label>
     <input type="text" name="email" id="email"> <br>
     <input type="submit">
@@ -17,7 +17,7 @@
   <script>
     document.querySelector('.ajaxsend').addEventListener('click',() => {
       const inputData = document.forms[0].elements[0].value;
-      sendAjax('http://127.0.0.1:3000/ajax_send_email',inputData);
+      sendAjax('http://127.0.0.1:3000/email/ajax',inputData);
     })
     const sendAjax = (url,email) => {
       const data = JSON.stringify({'email' : email});
