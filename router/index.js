@@ -11,6 +11,6 @@ router.get('/', function (req, res, next) {
 });
 router.use('/main', main);
 router.use('/email', email);
-router.use('./error', error);
+router.use('/error', error);
 
 module.exports = router;
