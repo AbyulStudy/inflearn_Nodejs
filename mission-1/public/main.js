@@ -54,7 +54,7 @@ const sendFetch = async (url, data) => {
     const data = res.data;
     if (message !== 'ok') return;
     data.map((el) => {
-      document.querySelector('.ajax-result').innerHTML += `${el}<br>`;
+      document.querySelector('.fetch-result').innerHTML += `${el}<br>`;
     });
   });
 };
