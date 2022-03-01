@@ -154,4 +154,40 @@ router.get('/promise/pool2', (req, res, next) => {
     });
 });
 
+router.post('/promise/pool', async (req, res, next) => {
+  const pool = mysql.createPool({
+    host: 'localhost',
+    port: '3306',
+    user: 'root',
+    password: 'root',
+    database: 'jsman',
+  });
+  const { email, name, pw } = req.body;
+  pool
+    .getConnection()
+    .then((connection) => {
+      connection
+        .execute('insert into user(email,name,pw) values(?,?,?)', [
+          email,
+          name,
+          pw,
+        ])
+        .then(([results, fields, err]) => {
+          if (err) throw err;
+          res.json(results);
+        })
+        .catch((err) => {
+          err.route = '[Error Route] : /promise/pool {POST}';
+          next(err);
+        })
+        .finally(() => {
+          connection.release();
+        });
+    })
+    .finally(() => {
+      // 해당 pool에 속한 모든 연결 종료
+      pool.end();
+    });
+});
+
 module.exports = router;
