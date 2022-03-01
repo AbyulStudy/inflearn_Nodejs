@@ -121,4 +121,37 @@ router.get('/promise/pool', (req, res, next) => {
     });
 });
 
+router.get('/promise/pool2', (req, res, next) => {
+  console.log('/promise/pool2');
+  const pool = mysql.createPool({
+    host: 'localhost',
+    port: '3306',
+    user: 'root',
+    password: 'root',
+    database: 'jsman',
+  });
+  const name = 'devbyul';
+  pool
+    .getConnection()
+    .then((connection) => {
+      const res = connection.execute('select * from user where name = ?', [
+        name,
+      ]);
+      connection.release();
+      return res;
+    })
+    .then(([results, fields, err]) => {
+      if (err) throw err;
+      res.json(results);
+    })
+    .catch((err) => {
+      err.route = '[Error Route] : /promise/pool2 {GET}';
+      next(err);
+    })
+    .finally(() => {
+      // 해당 pool에 속한 모든 연결 종료
+      pool.end();
+    });
+});
+
 module.exports = router;
